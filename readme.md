@@ -1,3 +1,7 @@
+💼 **Available for Hire:** I build custom agentic systems and consult for teams scaling AI workflows.
+> Looking for a Senior LangGraph/Python Engineer? → [LinkedIn](https://www.linkedin.com/in/armando-oliveira-177b9814b/) | armando.salles.oliv@gmail.com
+
+
 # 🧬 LangGraph Clinical Research Orchestrator
 
 > Multi-Agent AI system for clinical evidence surveillance.  
