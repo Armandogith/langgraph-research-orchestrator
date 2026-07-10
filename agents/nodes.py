@@ -22,11 +22,11 @@ class CriticOutput(BaseModel):
     is_sufficient: bool = Field(description="Data is enough?")
     feedback: str = Field(description="Feedback if not enough.")
 
-def orchestrator_node(state: AgentState):
+def orchestrator_node(state: AgentState) -> dict:
     print("🎯 Orchestrator: Iniciando pipeline...")
     return {"revision_count": 0, "research_data": [], "is_sufficient": False, "critic_feedback": ""}
 
-async def researcher_node(state: AgentState):
+async def researcher_node(state: AgentState) -> dict:
     rev = state.get("revision_count", 0)
     print(f"🔬 Researcher: Rodada {rev + 1} de pesquisa...")
 
@@ -59,7 +59,7 @@ async def researcher_node(state: AgentState):
 
     return {"research_data": new_data, "revision_count": rev + 1}
 
-async def critic_node(state: AgentState):
+async def critic_node(state: AgentState) -> dict:
     print("🧐 Critic: Avaliando qualidade dos dados...")
 
     prompt = f"""You are a Medical Critic. Evaluate if this research is sufficient for the query.
@@ -84,7 +84,7 @@ Respond ONLY with a valid JSON object, no markdown, no explanation, no code bloc
         print(f"   ⚠️  Erro ao parsear JSON do Critic: {e}. Conteúdo: {res.content[:100]}")
         return {"is_sufficient": False, "critic_feedback": res.content}
 
-async def writer_node(state: AgentState):
+async def writer_node(state: AgentState) -> dict:
     print("✍️  Writer: Gerando relatório clínico...")
 
     llm_writer = ChatOpenAI(
@@ -113,3 +113,4 @@ Structure the report with:
     ])
 
     return {"final_report": res.content}
+  
