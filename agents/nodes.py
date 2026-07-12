@@ -87,6 +87,7 @@ Respond ONLY with a valid JSON object, no markdown, no explanation, no code bloc
 async def writer_node(state: AgentState) -> dict:
     print("✍️  Writer: Gerando relatório clínico...")
 
+    print(f"DEBUG: chave = {repr(os.getenv('DEEPSEEK_API_KEY'))}")
     llm_writer = ChatOpenAI(
         model="deepseek-chat",
         api_key=os.getenv("DEEPSEEK_API_KEY"),
@@ -113,4 +114,3 @@ Structure the report with:
     ])
 
     return {"final_report": res.content}
-  
